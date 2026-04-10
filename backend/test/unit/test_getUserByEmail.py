@@ -4,23 +4,11 @@ import unittest.mock as mock
 
 #I dont have to test dao
 #So I can just tell the dao to return that it does not exist
-#Just look at how the dao
-
-#@pytest.fixture
-#def userController():
-#    mockedDao = mock.MagicMock()
-    #emailList = [{'email': 'test@mail.com'}]
-    #Ask how do I get a specific set of values that it will return when asked on mock
-#    mockedDao.find.return_value = {'email': email}
-#    mockedController = UserController(dao=mockedDao)
-#    return mockedController
 
 @pytest.mark.unit
 def test_get_user_by_email_invalid():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
-    #validationRes = mockedController.get_user_by_email('test')
-    #assert validationRes == ValueError
     with pytest.raises(ValueError):
         validationRes = mockedController.get_user_by_email('test')
 
