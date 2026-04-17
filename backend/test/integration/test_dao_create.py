@@ -1,5 +1,6 @@
 from src.util.dao import DAO
 import pytest
+import json
 import os
 #from unittest.mock import patch, MagicMock
 import pymongo
@@ -21,6 +22,7 @@ def database():
 def test_valid_key_val_pair(database):
     data = {'description': 'words'}
     res = database.create(data)
+    assert '_id' in res
     assert isinstance(res['_id']['$oid'], str)
 
 def test_invalid_key(database):
