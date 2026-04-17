@@ -2,7 +2,7 @@ from src.util.dao import DAO
 import pytest
 import os
 #from unittest.mock import patch, MagicMock
-#import pymongo
+import pymongo
 
 @pytest.fixture
 def database():
@@ -18,6 +18,19 @@ def database():
 #def test_create_example(database):
 #    assert database
 
+def test_valid_key_val_pair(database):
+    data = {'description': 'words'}
+    res = database.create(data)
+    assert isinstance(res['_id']['$oid'], str)
 
+def test_invalid_key(database):
+    with pytest.raises(pymongo.errors.WriteError):
+        data = {'willy_wonka': 'words'}
+        database.create(data)
+
+def test_invalid_type(database):
+    with pytest.raises(pymongo.errors.WriteError):
+        data = {'description': 1}
+        database.create(data)
 
 
