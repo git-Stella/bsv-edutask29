@@ -14,7 +14,7 @@ class UserController(Controller):
         address if the search returns multiple users.
         
         parameters:
-            email -- an email address string 
+            email -- an email address string
 
         returns:
             user -- the user object associated to that email address (if multiple users are associated to that email: return the first one)
