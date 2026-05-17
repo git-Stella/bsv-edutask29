@@ -18,14 +18,13 @@ def test_get_user_by_email_valid_no_exists():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
     mockedDao.find.return_value = Exception
-    #Was not quite sure how to check if an exception is raised...
-    #But here it says if one is raised then nothing will go wrong
-    #If it does not get raised it asserts something that is wrong.
-    try:
-        validationRes = mockedController.get_user_by_email('correct@mail.coop')
-        assert True is False
-    except Exception as e:
-        assert True is True
+    with pytest.raises(Exception):
+        mockedController.get_user_by_email('correct@mail.coop')
+    #try:
+    #    validationRes = mockedController.get_user_by_email('correct@mail.coop')
+    #    assert True is False
+    #except Exception as e:
+    #    assert True is True
 
 #email valid and does exist
 @pytest.mark.unit
