@@ -6,12 +6,13 @@ import os
 import pymongo
 from bson import json_util
 from bson.objectid import ObjectId
+from unittest.mock import patch
 
 @pytest.fixture
 def database():
     #setup
     #using todo cause it is the simplest in static/validators
-    mockTodo = {
+    mockValidator = {
         "$jsonSchema": {
             "bsonType": "object",
             "required": ["description"],
@@ -19,7 +20,7 @@ def database():
                 "description": {
                     "bsonType": "string",
                     "description": "the description of a todo must be determined",
-                    "uniqueItems": true
+                    "uniqueItems": True
                 }, 
                 "done": {
                     "bsonType": "bool"
@@ -27,10 +28,12 @@ def database():
             }
         }
     }
-    theDao = DAO('todo')
-    yield theDao
-    #teardown
-    theDao.drop()
+    with patch('src.util.validators') as MockValidator:
+        MockValidator.return_value = mockValidator
+        theDao = DAO('todo')
+        yield theDao
+        #teardown
+        theDao.drop()
 
 #Just testing so the database and dao connection works, not relevant with later tests
 #This was just while setting up
