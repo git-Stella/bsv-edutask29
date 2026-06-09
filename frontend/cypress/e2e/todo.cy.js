@@ -5,32 +5,6 @@ describe('beforeEach — todos', () => {
 //eiHqkDoFFFU
     before(function () {
     // create a fabricated user from a fixture
-    /*cy.fixture('user.json')
-      .then((user) => {
-        cy.request({
-          method: 'POST',
-          url: 'http://localhost:5000/users/create',
-          form: true,
-          body: user
-        }).then((response) => {
-          uid = response.body._id.$oid
-          name = user.firstName + ' ' + user.lastName
-          email = user.email
-        })
-      }).then(() => {
-        console.log("uid")
-        console.log(uid)
-        cy.fixture('task.json').then((tasks) => {
-                        tasks.userid = uid;
-
-                        cy.request({
-                            method: 'POST',
-                            url: 'http://localhost:5000/tasks/create',
-                            form: true,
-                            body: tasks
-                        })
-                    })
-      })*/
     cy.fixture('user.json')
       .then((user) => {
         cy.request({
@@ -87,9 +61,6 @@ describe('beforeEach — todos', () => {
     cy.get('[class="todo-item"]').find('[class="remover"]').click()
   })
 
-  /*after(() => {
-
-  })*/
   after(function () {
     // clean up by deleting the user from the database
     cy.request({
