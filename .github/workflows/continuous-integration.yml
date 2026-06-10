@@ -12,9 +12,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: /
-          python3 -m pip install --upgrade pip
-          pip install -r backend/requirements.pip
+        run: python3 -m pip install --upgrade pip && pip install -r backend/requirements.pip
       - name: run tests
         run: /
           pytest backend/test/unit -v
