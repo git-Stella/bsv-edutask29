@@ -10,21 +10,25 @@ def test_get_user_by_email_invalid():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
     with pytest.raises(ValueError):
-        validationRes = mockedController.get_user_by_email('test')
+        mockedController.get_user_by_email('test')
+
+#email valid but does not exist
+@pytest.mark.unit
+def test_get_user_by_email_invalid_no_exists():
+    mockedDao = mock.MagicMock()
+    mockedController = UserController(dao=mockedDao)
+    #mockedDao.find.return_value = Exception
+    with pytest.raises(ValueError):
+        mockedController.get_user_by_email('test')
 
 #email valid but does not exist
 @pytest.mark.unit
 def test_get_user_by_email_valid_no_exists():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
-    mockedDao.find.return_value = Exception
+    #mockedDao.find.return_value = Exception
     with pytest.raises(Exception):
         mockedController.get_user_by_email('correct@mail.coop')
-    #try:
-    #    validationRes = mockedController.get_user_by_email('correct@mail.coop')
-    #    assert True is False
-    #except Exception as e:
-    #    assert True is True
 
 #email valid and does exist
 @pytest.mark.unit
