@@ -1,0 +1,17 @@
+name: Python package
+
+on: [push, pull_request, fork]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python3 -m pip install --upgrade pip && pip install -r backend/requirements.pip
+      - name: run tests
+        run: pytest backend/test/unit -v
