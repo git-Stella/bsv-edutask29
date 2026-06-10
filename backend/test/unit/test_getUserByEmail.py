@@ -4,7 +4,7 @@ import unittest.mock as mock
 
 #I dont have to test dao
 #So I can just tell the dao to return that it does not exist
-##
+###
 @pytest.mark.unit
 def test_get_user_by_email_invalid():
     mockedDao = mock.MagicMock()
