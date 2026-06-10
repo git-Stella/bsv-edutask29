@@ -32,6 +32,9 @@ class UserController(Controller):
             users = self.dao.find({'email': email})
             if len(users) == 1:
                 return users[0]
+            #This part below added so it raises exception if no email found
+            elif len(users) < 1:
+                raise Exception
             else:
                 print(f'Error: more than one user found with mail {email}')
                 return users[0]
