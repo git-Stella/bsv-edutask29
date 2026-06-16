@@ -14,10 +14,10 @@ def test_get_user_by_email_invalid():
 
 #email valid but does not exist
 @pytest.mark.unit
-def test_get_user_by_email_invalid_no_exists():
+def test_get_user_by_email_invalid_exists():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
-    #mockedDao.find.return_value = Exception
+    mockedDao.find.return_value = 'test'
     with pytest.raises(ValueError):
         mockedController.get_user_by_email('test')
 
