@@ -6,13 +6,13 @@ import unittest.mock as mock
 #So I can just tell the dao to return that it does not exist
 ###
 @pytest.mark.unit
-def test_get_user_by_email_invalid():
+def test_get_user_by_email_invalid_no_exists():
     mockedDao = mock.MagicMock()
     mockedController = UserController(dao=mockedDao)
     with pytest.raises(ValueError):
         mockedController.get_user_by_email('test')
 
-#email valid but does not exist
+#email invalid but does not exist
 @pytest.mark.unit
 def test_get_user_by_email_invalid_exists():
     mockedDao = mock.MagicMock()
